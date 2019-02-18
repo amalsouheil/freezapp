@@ -9,17 +9,17 @@ import java.lang.ref.WeakReference;
  * Created by Souheil Amal on 2019-02-15
  */
 public class MyAsyncTask extends AsyncTask<Void, Void, Long> {
-    // Implement listeners methods (Callback)
+    // 1 - Implement listeners methods (Callback)
     public interface Listeners {
         void onPreExecute();
         void doInBackground();
         void onPostExecute(Long success);
     }
 
-    // Declare callback
+    // 2 - Declare callback
     private final WeakReference<Listeners> callback;
 
-    // Constructor
+    // 3 - Constructor
     public MyAsyncTask(Listeners callback){
         this.callback = new WeakReference<>(callback);
     }
@@ -27,21 +27,21 @@ public class MyAsyncTask extends AsyncTask<Void, Void, Long> {
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        this.callback.get().onPreExecute(); // Call the related callback method
+        this.callback.get().onPreExecute(); // 4 - Call the related callback method
         Log.e("TAG", "AsyncTask is started.");
     }
 
     @Override
     protected void onPostExecute(Long success) {
         super.onPostExecute(success);
-        this.callback.get().onPostExecute(success); // Call the related callback method
+        this.callback.get().onPostExecute(success); // 4 - Call the related callback method
         Log.e("TAG", "AsyncTask is finished.");
     }
 
     @Override
     protected Long doInBackground(Void... voids) {
-        this.callback.get().doInBackground(); // Call the related callback method
+        this.callback.get().doInBackground(); // 4 - Call the related callback method
         Log.e("TAG", "AsyncTask doing some big work...");
-        return Utils.executeLongActionDuring7seconds(); // Execute our task
+        return Utils.executeLongActionDuring7seconds(); // 5 - Execute our task
     }
 }

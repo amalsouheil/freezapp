@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -37,7 +38,7 @@
         android:layout_weight="1"
         android:orientation="vertical"
         android:gravity="center"
-        android:background="#E26A6A">
+        android:background="@color/colorBackground">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -54,8 +55,7 @@
                 android:textStyle="bold"
                 android:background="#E26A6A"
                 android:tag="10"
-                android:onClick="onClickButton"
-               />
+                android:onClick="onClickButton"/>
 
             <Button
                 android:layout_width="0dip"
@@ -66,8 +66,7 @@
                 android:textStyle="bold"
                 android:background="#87D37C"
                 android:tag="20"
-                android:onClick="onClickButton"
-               />
+                android:onClick="onClickButton"/>
 
         </LinearLayout>
 
@@ -86,8 +85,7 @@
                 android:textStyle="bold"
                 android:background="#81CFE0"
                 android:tag="30"
-                android:onClick="onClickButton"
-               />
+                android:onClick="onClickButton"/>
 
             <Button
                 android:layout_width="0dip"
@@ -98,8 +96,7 @@
                 android:textStyle="bold"
                 android:background="#52B3D9"
                 android:tag="40"
-                android:onClick="onClickButton"
-               />
+                android:onClick="onClickButton"/>
 
         </LinearLayout>
 
@@ -113,8 +110,7 @@
             android:textStyle="bold"
             android:background="#FABE58"
             android:tag="50"
-            android:onClick="onClickButton"
-           />
+            android:onClick="onClickButton"/>
 
         <Button
             android:layout_width="match_parent"
@@ -125,8 +121,7 @@
             android:textStyle="bold"
             android:background="#6C7A89"
             android:tag="60"
-            android:onClick="onClickButton"
-           />
+            android:onClick="onClickButton"/>
 
         <Button
             android:layout_width="match_parent"
@@ -137,8 +132,7 @@
             android:textStyle="bold"
             android:background="#36D7B7"
             android:tag="70"
-            android:onClick="onClickButton"
-           />
+            android:onClick="onClickButton"/>
 
     </LinearLayout>
 
