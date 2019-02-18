@@ -6,12 +6,14 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import amal.souheil.freezapp.R;
 import amal.souheil.freezapp.utils.MyAsyncTask;
+import amal.souheil.freezapp.utils.MyAsyncTaskLoader;
 import amal.souheil.freezapp.utils.MyHandlerThread;
 import amal.souheil.freezapp.utils.Utils;
 
@@ -23,6 +25,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     private static int JOBSCHEDULER_ID = 200;
 
     //FOR DATA
+    // 1 - Declaring a HandlerThread
     private MyHandlerThread handlerThread;
 
     @Override
@@ -32,7 +35,10 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         //Get progressbar from layout
         this.progressBar = findViewById(R.id.activity_main_progress_bar);
+
         this.configureHandlerThread();
+        //Start AsyncTask
+        this.startAsyncTask();
 
     }
 
@@ -85,7 +91,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     // BACKGROUND TASK (HandlerThread & AsyncTask)
     // -------------------------------------------
 
-    // EXECUTE HANDLER THREAD
+    // 4-EXECUTE HANDLER THREAD
     private void startHandlerThread(){
         handlerThread.startHandler();
     }
@@ -93,6 +99,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     // 3 - We create and start our AsyncTask
     private void startAsyncTask() {
+
         new MyAsyncTask(this).execute();
     }
 
@@ -112,27 +119,31 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         this.updateUIAfterTask(taskEnd);
     }
 
+    // 2 - Implements callback methods
 
-    @NonNull
     @Override
-    public Loader<Long> onCreateLoader(int i, @Nullable Bundle bundle) {
-        return null;
+    public Loader<Long> onCreateLoader(int id, Bundle args) {
+        Log.e("TAG", "On Create !");
+        this.updateUIBeforeTask();
+        return new MyAsyncTaskLoader(this); // 5 - Return a new AsyncTaskLoader
     }
 
     @Override
-    public void onLoadFinished(@NonNull Loader<Long> loader, Long aLong) {
-
+    public void onLoadFinished(Loader<Long> loader, Long data) {
+        Log.e("TAG", "On Finished !");
+        loader.stopLoading(); // 6 - Force loader to stop
+        updateUIAfterTask(data);
     }
 
     @Override
-    public void onLoaderReset(@NonNull Loader<Long> loader) {
+    public void onLoaderReset(Loader<Long> loader) { }
 
-    }
     // -----------------
     // UPDATE UI
     // -----------------
 
     public void updateUIBeforeTask(){
+
         progressBar.setVisibility(View.VISIBLE);
     }
 
